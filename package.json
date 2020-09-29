@@ -1,6 +1,6 @@
 {
-    "name": "spwn",
-    "displayName": "SPWN",
+    "name": "spwn-language-support",
+    "displayName": "SPWN Language Support",
     "description": "Language support for SPWN",
     "version": "0.0.1",
     "engines": {
@@ -18,7 +18,7 @@
         }],
         "grammars": [{
             "language": "spwn",
-            "scopeName": "",
+            "scopeName": "source.spwn",
             "path": "./syntaxes/spwn.tmLanguage.json"
         }]
     }
