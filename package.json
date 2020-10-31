@@ -1,8 +1,10 @@
 {
     "name": "spwn-language-support",
+    "publisher": "Spu7Nix",
     "displayName": "SPWN Language Support",
     "description": "Language support for SPWN",
     "version": "0.0.1",
+    "icon": "spwn_logo_smol.png",
     "repository": {
         "type" : "git",
         "url" : "https://github.com/Spu7Nix/SPWN-vscode.git"
