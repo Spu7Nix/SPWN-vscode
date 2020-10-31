@@ -1,4 +1,4 @@
-![SPWN](spwn_logo_name_smol.png)
+![SPWN](spwn_logo_colored.png)
 
 ## Features
 

@@ -3,6 +3,10 @@
     "displayName": "SPWN Language Support",
     "description": "Language support for SPWN",
     "version": "0.0.1",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/Spu7Nix/SPWN-vscode.git"
+    },
     "engines": {
         "vscode": "^1.49.0"
     },
