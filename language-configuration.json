@@ -26,5 +26,10 @@
         ["(", ")"],
         ["\"", "\""],
         ["'", "'"]
-    ]
+    ],
+    "indentationRules": {
+        "increaseIndentPattern": "(\\[|\\{|\\()\n",
+        "decreaseIndentPattern": "(?<=\n(\\]|\\}|\\)))"
+    }
+    
 }

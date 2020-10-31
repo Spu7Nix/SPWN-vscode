@@ -55,8 +55,8 @@
 
 
     {
-      "match": "[0-9?]+[gbci]",
-      "name": "constant.other.id.spwn"
+      "match": "([0-9?]+)[gbci]",
+      "name": "constant.numeric.spwn"
     },
 
 
@@ -85,7 +85,7 @@
 
     {
       "comment": "Types",
-      "match": "(?<=@)([a-zA-Z_][a-zA-Z0-9_]*)",
+      "match": "@([a-zA-Z_][a-zA-Z0-9_]*)",
       "name": "support.type.spwn"
     },
 
@@ -95,6 +95,11 @@
       "comment": "Language constants",
       "match": "\\b(true|false|null|trigger|obj)\\b",
       "name": "constant.language.spwn"
+    },
+
+    {
+      "match": "let",
+      "name": "storage.type.spwn"
     },
 
 
@@ -150,7 +155,7 @@
     "keywords": {
       "patterns": [{
         "comment": "Flow control keywords",
-        "match": "\\b(else|for|if|return|error|extract|in|let|type|import|\\->)\\b",
+        "match": "\\b(else|for|if|return|error|extract|in|type|import|impl|\\->|\\=>|break|continue|while|as)\\b",
         "name": "keyword.control.spwn"
       }]
     },
@@ -167,11 +172,11 @@
           "name": "keyword.operator.logical.spwn"
         },
         {
-          "match": "(=|\\+=|\\-=|\\*=|/=)",
+          "match": "(=|\\+=|\\-=|\\*=|\/=)",
           "name": "keyword.operator.assignment.spwn"
         },
         {
-          "match": "(\\+|\\-|\\*|/|%|\\^)",
+          "match": "(\\+|\\-|\\*|\/|%|\\^)",
           "name": "keyword.operator.arithmetic.spwn"
         },
         {
