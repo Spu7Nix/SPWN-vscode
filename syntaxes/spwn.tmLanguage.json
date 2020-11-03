@@ -29,7 +29,7 @@
       "name": "comment.line.double-slash.spwn"
     },
     {
-      "comment": "Interpreted string literals",
+      "comment": "Double quoted string",
       "begin": "\"",
       "beginCaptures": {
         "0": {
@@ -50,6 +50,29 @@
           "include": "#string_placeholder"
         }
       ]
+    },
+
+    {
+      "comment": "Single quoted string",
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.spwn"
+        }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.spwn"
+        }
+      },
+      "name": "string.quoted.single.spwn",
+      "patterns": [{
+          "include": "#string_escaped_char"
+        },
+        {
+          "include": "#string_placeholder"
+        }]
     },
 
     {
