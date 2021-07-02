@@ -6,15 +6,20 @@ Basic language support for the SPWN programming language for Geometry Dash, incl
 
 ## Release Notes
 
-## 0.0.1
+## 0.1.0
 
 - Initial release
 
-## 0.0.2
+## 0.2.0
 
 - Bugfixes
 - Added support for single-quoted strings
 
-## 0.0.3
+## 0.3.0
 
 - Bugfixes
+
+## 0.4.0
+
+- Bugfixes
+- Added new keywords

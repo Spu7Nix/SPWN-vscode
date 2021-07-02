@@ -103,7 +103,7 @@
 
     {
       "comment": "Builtin",
-      "match": "$",
+      "match": "\\b$\\b",
       "name": "support.constant.spwn"
     },
 
@@ -122,7 +122,7 @@
     },
 
     {
-      "match": "let",
+      "match": "\\blet\\b",
       "name": "storage.type.spwn"
     },
 
@@ -179,7 +179,7 @@
     "keywords": {
       "patterns": [{
         "comment": "Flow control keywords",
-        "match": "\\b(else|for|if|return|error|extract|in|type|import|impl|\\->|\\=>|break|continue|while|as)\\b",
+        "match": "\\b(else|for|if|return|throw|extract|in|type|import|impl|\\->|\\=>|break|continue|while|as|sync|switch|case)\\b",
         "name": "keyword.control.spwn"
       }]
     },
