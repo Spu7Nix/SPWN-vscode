@@ -3,7 +3,7 @@
     "publisher": "Spu7Nix",
     "displayName": "SPWN Language Support",
     "description": "Language support for SPWN",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "icon": "spwn_logo_smol.png",
     "repository": {
         "type" : "git",

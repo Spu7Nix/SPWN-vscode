@@ -6,3 +6,7 @@
 
 - Bugfixes
 - Added support for single-quoted strings
+
+## 0.0.3
+
+- Bugfixes
