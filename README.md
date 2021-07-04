@@ -23,3 +23,7 @@ Basic language support for the SPWN programming language for Geometry Dash, incl
 
 - Bugfixes
 - Added new keywords
+
+## 0.5.0
+
+- Made syntax highlighting actually good

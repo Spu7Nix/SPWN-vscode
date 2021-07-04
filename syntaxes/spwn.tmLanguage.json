@@ -6,187 +6,419 @@
     "spwn"
   ],
 
-  "patterns": [{
-      "comment": "Block comments",
-      "begin": "/\\*",
-      "end": "\\*/",
-      "captures": {
-        "0": {
-          "name": "punctuation.definition.comment.spwn"
-        }
-      },
-      "name": "comment.block.spwn"
-    },
-    {
-      "comment": "Line comments",
-      "begin": "//",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.spwn"
-        }
-      },
-      "end": "$",
-      "name": "comment.line.double-slash.spwn"
-    },
-    {
-      "comment": "Double quoted string",
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.spwn"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.spwn"
-        }
-      },
-      "name": "string.quoted.double.spwn",
-      "patterns": [{
-          "include": "#string_escaped_char"
-        },
-        {
-          "include": "#string_placeholder"
-        }
-      ]
-    },
-
-    {
-      "comment": "Single quoted string",
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.spwn"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.spwn"
-        }
-      },
-      "name": "string.quoted.single.spwn",
-      "patterns": [{
-          "include": "#string_escaped_char"
-        },
-        {
-          "include": "#string_placeholder"
-        }]
-    },
-
-    {
-      "comment": "Functions",
-      "match": "(([a-zA-Z_][a-zA-Z0-9_]*))(?=\\()",
-      "name": "support.function.spwn"
-    },
-
-
-    {
-      "match": "(?<!\\w)([0-9?]+)[gbci]",
-      "name": "constant.numeric.spwn"
-    },
-
-
-    {
-      "match": "(?<!\\w)[0-9]+(\\.[0-9]+)?",
-      "name": "constant.numeric.spwn"
-    },
-
-    
-
-    {
-      "comment": "Variables",
-      "match": "\\bself\\b",
-      "name": "variable.language.spwn"
-    },
-
-    {
-      "comment": "Builtin",
-      "match": "\\b$\\b",
-      "name": "support.constant.spwn"
-    },
-
-    {
-      "comment": "Types",
-      "match": "@([a-zA-Z_][a-zA-Z0-9_]*)",
-      "name": "support.type.spwn"
-    },
-
-
-
-    {
-      "comment": "Language constants",
-      "match": "\\b(true|false|null|trigger|obj)\\b",
-      "name": "constant.language.spwn"
-    },
-
-    {
-      "match": "\\blet\\b",
-      "name": "storage.type.spwn"
-    },
-
-
-    {
-      "comment": "Terminators",
-      "match": ";",
-      "name": "punctuation.terminator.spwn"
-    },
-    {
-      "include": "#brackets"
-    },
-    {
-      "include": "#delimiters"
-    },
-    {
-      "include": "#keywords"
-    },
-    {
-      "include": "#operators"
-    }
+  "patterns": [
+    {"include": "#root"}
   ],
+  
   "repository": {
-    "brackets": {
-      "patterns": [{
-          "match": "\\{|\\}",
-          "name": "punctuation.other.bracket.curly.spwn"
+    "root": {
+      "patterns": [
+        {"include": "#comments"},
+        {
+          "comment": "Double quoted string",
+          "begin": "\"",
+          "beginCaptures": [{"name": "punctuation.definition.string.begin.spwn"}],
+          "end": "\"",
+          "endCaptures": [{"name": "punctuation.definition.string.end.spwn"}],
+          "name": "string.quoted.double.spwn",
+          "patterns": [
+            {"include": "#string_escaped_char"},
+            {"include": "#string_placeholder"}
+          ]
+        },
+
+        {
+          "comment": "Single quoted string",
+          "begin": "'",
+          "beginCaptures": [{"name": "punctuation.definition.string.begin.spwn"}],
+          "end": "'",
+          "endCaptures": [{"name": "punctuation.definition.string.end.spwn"}],
+          "name": "string.quoted.single.spwn",
+          "patterns": [
+            {"include": "#string_escaped_char"},
+            {"include": "#string_placeholder"}
+          ]
+        },
+
+        {
+          "comment": "Methods",
+          "match": "(?<=\\.)(?<![.$]\\.)[a-zA-Z_]\\w*(?=\\s*\\()",
+          "name": "entity.name.function.spwn"
+        },
+        
+        {
+          "comment": "Functions",
+          "match": "\\b[a-zA-Z_]\\w*(?=\\s*\\()",
+          "name": "support.function.spwn"
+        },
+
+
+        {
+          "match": "(?<![a-zA-Z_])[\\d?]+[gbci]\\b",
+          "name": "constant.numeric.spwn"
+        },
+
+
+        {
+          "match": "\\b\\d+(\\.\\d+)?",
+          "name": "constant.numeric.spwn"
+        },
+
+        
+
+        {
+          "comment": "Builtin",
+          "match": "\\$",
+          "name": "constant.language.spwn"
+        },
+
+        {
+          "comment": "Types",
+          "match": "@[a-zA-Z_]\\w*",
+          "name": "support.type.spwn"
+        },
+
+
+
+        {
+          "comment": "Language constants",
+          "match": "\\b(true|false|null|trigger|obj|self)\\b",
+          "name": "constant.language.spwn"
+        },
+
+        {
+          "begin": "\\blet\\b",
+          "beginCaptures": [{"name": "storage.type.spwn"}],
+          "end": "=",
+          "endCaptures": [{"name": "keyword.operator.assignnment.spwn"}],
+          "patterns": [
+            {
+              "match": "[a-zA-Z_]\\w*",
+              "name": "variable.spwn"
+            }
+          ]
+        },
+        
+        {
+          "match": "(?<=\\.)(?<!\\.{2})[a-zA-Z_]\\w*",
+          "name": "variable.property.spwn"
+        },
+        
+        {
+          "match": "(::)([a-zA-Z_]\\w*)",
+          "captures": {
+            "1": {"name": "keyword.operator.spwn"},
+            "2": {"name": "entity.name.function.spwn"}
+          }
+        },
+        
+        {"include": "#keywords"},
+        
+        {
+          "match": "\\b[a-zA-Z_]\\w*(?=\\s*=>)",
+          "name": "variable.parameter.spwn"
+        },
+
+        {
+          "comment": "Terminators",
+          "match": ";",
+          "name": "punctuation.terminator.spwn"
+        },
+        {"include": "#brackets"},
+        {"include": "#delimiters"},
+        {"include": "#operators"}
+      ]
+    },
+    
+    "space": {
+      "patterns": [
+        {
+          "match": "\\s+",
+          "name": "text.spwn"
         },
         {
-          "match": "\\(|\\)",
-          "name": "punctuation.other.bracket.round.spwn"
-        },
-        {
-          "match": "\\[|\\]",
-          "name": "punctuation.other.bracket.square.spwn"
+          "comment": "A funny hack that forces vscode to eat the newline",
+          "match": "\\n$",
+          "name": "text.spwn"
         }
       ]
     },
+    
+    "comments": {
+      "patterns": [
+        {
+          "comment": "Block comments",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "captures": [{"name": "punctuation.definition.comment.spwn"}],
+          "name": "comment.block.spwn"
+        },
+        {
+          "comment": "Line comments",
+          "begin": "//",
+          "beginCaptures": [{"name": "punctuation.definition.comment.spwn"}],
+          "end": "$",
+          "name": "comment.line.double-slash.spwn"
+        }
+      ]
+    },
+    
+    "func-args": {
+      "patterns": [
+        {
+          "comment": "`self` is allowed in params list",
+          "match": "\\bself\\b",
+          "name": "constant.language.spwn"
+        },
+        {
+          "begin": "\\b([a-zA-Z_]\\w*)(?:\\s*(:(?!:)|=(?![=>]))|\\b)",
+          "beginCaptures": {
+            "1": {"name": "variable.parameter.spwn"},
+            "2": {"name": "keyword.operator.spwn"}
+          },
+          "end": "(?=[,)])",
+          "patterns": [
+            {"include": "#root"}
+          ]
+        },
+        {"include": "#root"}
+      ]
+    },
+    
+    "brackets": {
+      "patterns": [
+        {
+          "begin": "(!)(\\{)",
+          "beginCaptures": {
+            "1": {"name": "keyword.spwn"},
+            "2": {"name": "punctuation.other.bracket.curly.begin.spwn"}
+          },
+          "end": "\\}",
+          "endCaptures": [{"name": "punctuation.other.bracket.curly.end.spwn"}],
+          "patterns": [
+            {"include": "#root"}
+          ]
+        },
+        
+        {
+          "begin": "\\{",
+          "beginCaptures": [{"name": "punctuation.other.bracket.curly.begin.spwn"}],
+          "end": "\\}",
+          "endCaptures": [{"name": "punctuation.other.bracket.curly.end.spwn"}],
+          "patterns": [
+            {"include": "#space"},
+            {"include": "#comments"},
+            {
+              "begin": "(?=\\w+\\s*:(?!:)|\\b(?!(?:continue|break|return|self|true|false|null)\\b)[a-zA-Z_]\\w*\\s*[,}]|\\.{2})",
+              "end": "(?=\\})",
+              "patterns": [
+                {"include": "#space"},
+                {"include": "#comments"},
+                {
+                  "begin": "(\\d+)\\s*(:)(?!:)",
+                  "beginCaptures": {
+                    "1": {"name": "constant.numeric.spwn"},
+                    "2": {"name": "keyword.operator.spwn"}
+                  },
+                  "end": ",|(?=\\})",
+                  "endCaptures": [{"name": "punctuation.separator.spwn"}],
+                  "patterns": [
+                    {"include": "#root"}
+                  ]
+                },
+                {
+                  "begin": "([a-zA-Z_]\\w*)\\s*(:)(?!:)",
+                  "beginCaptures": {
+                    "1": {"name": "variable.property.spwn"},
+                    "2": {"name": "keyword.operator.spwn"}
+                  },
+                  "end": ",|(?=\\})",
+                  "endCaptures": [{"name": "punctuation.separator.spwn"}],
+                  "patterns": [
+                    {"include": "#root"}
+                  ]
+                },
+                {
+                  "begin": "[a-zA-Z_]\\w*",
+                  "beginCaptures": [{"name": "variable.property.spwn"}],
+                  "end": ",|(?=\\})",
+                  "endCaptures": [{"name": "punctuation.separator.spwn"}],
+                  "patterns": [
+                    {"include": "#root"}
+                  ]
+                },
+                {
+                  "begin": "(?=\\.{2})",
+                  "end": ",|(?=\\})",
+                  "endCaptures": [{"name": "punctuation.separator.spwn"}],
+                  "patterns": [
+                    {"include": "#root"}
+                  ]
+                }
+              ]
+            },
+            {
+              "begin": "(?=.)",
+              "end": "(?=\\})",
+              "patterns": [
+                {"include": "#root"}
+              ]
+            }
+          ]
+        },
+        
+        {
+          "comment": "Definitely a regular function or arrow function",
+          "begin": "(?<!\\w\\s*)\\((?=\\s*[a-zA-Z_]\\w*\\s*(?:,|:(?!:)|=(?![=>])|\\)\\s*(?:\\{|=>)))",
+          "beginCaptures": [{"name": "punctuation.other.parameters.begin.spwn"}],
+          "end": "\\)",
+          "endCaptures": [{"name": "punctuation.other.parameters.end.spwn"}],
+          "patterns": [
+            {"include": "#func-args"}
+          ]
+        },
+        
+        {
+          "comment": "Either a paren expression, regular function, or arrow function",
+          "begin": "(?<!\\w\\s*)\\(",
+          "beginCaptures": [{"name": "punctuation.other.bracket.round.begin.spwn"}],
+          "end": "\\)",
+          "endCaptures": [{"name": "punctuation.other.bracket.round.end.spwn"}],
+          "patterns": [
+            {
+              "begin": "(?=,|\\s*[a-zA-Z_]\\w*\\s*(?:,|:(?!:)|=(?![=>])|\\)\\s*\\{))",
+              "end": "(?=\\))",
+              "patterns": [
+                {"include": "#func-args"}
+              ]
+            },
+            {"include": "#root"}
+          ]
+        },
+        
+        {
+          "comment": "Some sort of function call",
+          "begin": "\\(",
+          "beginCaptures": [{"name": "punctuation.other.bracket.round.begin.spwn"}],
+          "end": "\\)",
+          "endCaptures": [{"name": "punctuation.other.bracket.round.end.spwn"}],
+          "patterns": [
+            {
+              "comment": "A named argument",
+              "match": "\\b([a-zA-Z_]\\w*)\\s*(=)(?![=>])",
+              "captures": {
+                "1": {"name": "variable.parameter.spwn"},
+                "2": {"name": "keyword.operator.spwn"}
+              }
+            },
+            {"include": "#root"}
+          ]
+        },
+        
+        {
+          "begin": "#\\[",
+          "beginCaptures": [{"name": "keyword.directive.begin.spwn"}],
+          "end": "\\]",
+          "endCaptures": [{"name": "keyword.directive.end.spwn"}],
+          "patterns": [
+            {
+              "match": "\\b[a-zA-Z_]\\w*\\b",
+              "name": "support.function.directive.spwn"
+            },
+            {"include": "#root"}
+          ]
+        },
+        
+        {
+          "begin": "\\[",
+          "beginCaptures": [{"name": "punctuation.other.bracket.square.begin.spwn"}],
+          "end": "\\]",
+          "endCaptures": [{"name": "punctuation.other.bracket.square.end.spwn"}],
+          "patterns": [
+            {"include": "#root"}
+          ]
+        }
+      ]
+    },
+    
     "delimiters": {
-      "patterns": [{
+      "patterns": [
+        {
           "match": ",",
           "name": "punctuation.other.comma.spwn"
         },
         {
           "match": "\\.(?!\\.)",
           "name": "punctuation.other.period.spwn"
-        },
-        {
-          "match": ":",
-          "name": "punctuation.other.colon.spwn"
         }
       ]
     },
+    
     "keywords": {
-      "patterns": [{
-        "comment": "Flow control keywords",
-        "match": "\\b(else|for|if|return|throw|extract|in|type|import|impl|\\->|\\=>|break|continue|while|as|sync|switch|case)\\b",
-        "name": "keyword.control.spwn"
-      }]
+      "patterns": [
+        {
+          "begin": "\\bimpl\\b",
+          "beginCaptures": [{"name": "keyword.spwn"}],
+          "end": "(?<=\\})",
+          "patterns": [
+            {
+              "begin": "@[a-zA-Z_]\\w*",
+              "beginCaptures": [{"name": "entity.name.type.spwn"}],
+              "end": "(?<=\\})",
+              "patterns": [
+                {
+                  "begin": "\\{",
+                  "beginCaptures": [{"name": "punctuation.other.bracket.curly.begin.spwn"}],
+                  "end": "\\}",
+                  "endCaptures": [{"name": "punctuation.other.bracket.curly.end.spwn"}],
+                  "patterns": [
+                    {"include": "#space"},
+                    {"include": "#comments"},
+                    {
+                      "begin": "([a-zA-Z_]\\w*)\\s*(:)(?!:)",
+                      "beginCaptures": {
+                        "1": {"name": "entity.name.function.spwn"},
+                        "2": {"name": "keyword.operator.spwn"}
+                      },
+                      "end": ",|(?=\\})",
+                      "endCaptures": [{"name": "punctuation.separator.spwn"}],
+                      "patterns": [
+                        {"include": "#root"}
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        
+        {
+          "begin": "\\bfor\\b",
+          "beginCaptures": [{"name": "keyword.spwn"}],
+          "end": "\\bin\\b",
+          "endCaptures": [{"name": "keyword.spwn"}],
+          "patterns": [
+            {"include": "#space"},
+            {"include": "#comments"},
+            {
+              "match": "\\b[a-zA-Z_]\\w*\\b",
+              "name": "variable.spwn"
+            }
+          ]
+        },
+        
+        {
+          "comment": "Flow control keywords",
+          "match": "\\b(else|for|if|return|error|extract|in|type|import|impl|break|continue|while|as|throw|switch|has|case|sync)\\b",
+          "name": "keyword.control.spwn"
+        }
+      ]
     },
+    
     "operators": {
       "comment": "Note that the order here is very important!",
       "patterns": [
-
         {
           "match": "(==|!=|<=|>=|<|>)",
           "name": "keyword.operator.comparison.spwn"
@@ -200,19 +432,28 @@
           "name": "keyword.operator.assignment.spwn"
         },
         {
-          "match": "(\\+|\\-|\\*|\/|%|\\^)",
+          "match": "(\\+|\\-|\\*|\/|%|\\^|\\|)",
           "name": "keyword.operator.arithmetic.spwn"
         },
         {
           "match": "\\.\\.",
           "name": "keyword.operator.range.spwn"
+        },
+        {
+          "match": "::",
+          "name": "keyword.operator.spwn"
+        },
+        {
+          "match": "->|=>",
+          "name": "keyword.control.spwn"
         }
       ]
     },
 
 
     "string_escaped_char": {
-      "patterns": [{
+      "patterns": [
+        {
           "match": "\\\\([0-7]{3}|[abfnrtv\\\\'\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})",
           "name": "constant.character.escape.spwn"
         },
@@ -222,11 +463,14 @@
         }
       ]
     },
+    
     "string_placeholder": {
-      "patterns": [{
-        "match": "%(\\[\\d+\\])?([\\+#\\-0\\x20]{,2}((\\d+|\\*)?(\\.?(\\d+|\\*|(\\[\\d+\\])\\*?)?(\\[\\d+\\])?)?))?[vT%tbcdoqxXUbeEfFgGsp]",
-        "name": "constant.other.placeholder.spwn"
-      }]
+      "patterns": [
+        {
+          "match": "%(\\[\\d+\\])?([\\+#\\-0\\x20]{,2}((\\d+|\\*)?(\\.?(\\d+|\\*|(\\[\\d+\\])\\*?)?(\\[\\d+\\])?)?))?[vT%tbcdoqxXUbeEfFgGsp]",
+          "name": "constant.other.placeholder.spwn"
+        }
+      ]
     }
 
   }
