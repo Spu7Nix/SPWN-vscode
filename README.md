@@ -27,3 +27,10 @@ Basic language support for the SPWN programming language for Geometry Dash, incl
 ## 0.5.0
 
 - Made syntax highlighting actually good
+
+## 0.6.0
+
+- Added support for `while`-loops
+- Added support for raw strings
+- Added support for special property names
+- Fixed some bugs

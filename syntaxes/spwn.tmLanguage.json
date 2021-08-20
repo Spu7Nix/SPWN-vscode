@@ -14,6 +14,15 @@
     "root": {
       "patterns": [
         {"include": "#comments"},
+        
+        {
+          "comment": "Raw string",
+          "begin": "\\br([\"'])",
+          "beginCaptures": [{"name": "punctuation.definition.string.begin.spwn"}],
+          "end": "\\1",
+          "endCaptures": [{"name": "punctuation.definition.string.end.spwn"}],
+          "name": "string.quoted.raw.spwn"
+        },
         {
           "comment": "Double quoted string",
           "begin": "\"",
@@ -26,7 +35,6 @@
             {"include": "#string_placeholder"}
           ]
         },
-
         {
           "comment": "Single quoted string",
           "begin": "'",
@@ -92,8 +100,9 @@
           "end": "=",
           "endCaptures": [{"name": "keyword.operator.assignnment.spwn"}],
           "patterns": [
+            {"include": "#root"},
             {
-              "match": "[a-zA-Z_]\\w*",
+              "match": "\\b[a-zA-Z_]\\w*\\b",
               "name": "variable.spwn"
             }
           ]
@@ -101,7 +110,7 @@
         
         {
           "match": "(?<=\\.)(?<!\\.{2})[a-zA-Z_]\\w*",
-          "name": "variable.property.spwn"
+          "captures": [{"patterns": [{"include": "#property-name"}]}]
         },
         
         {
@@ -229,7 +238,9 @@
                 {
                   "begin": "([a-zA-Z_]\\w*)\\s*(:)(?!:)",
                   "beginCaptures": {
-                    "1": {"name": "variable.property.spwn"},
+                    "1": {"patterns": [
+                      {"include": "#property-name"}
+                    ]},
                     "2": {"name": "keyword.operator.spwn"}
                   },
                   "end": ",|(?=\\})",
@@ -341,6 +352,24 @@
       ]
     },
     
+    "property-name": {
+      "patterns": [
+        {
+          "match": "\\b(type)\\b",
+          "name": "keyword.spwn"
+        },
+        {"include": "#op-overloads"},
+        {
+          "match": "[a-zA-Z_]\\w*",
+          "name": "variable.property.spwn"
+        }
+      ]
+    },
+    "op-overloads": {
+      "match": "\\b_(?:either|or|and|equal|not_equal|more_or_equal|less_or_equal|more_than|less_than|times|mod|pow|plus|minus|divided_by|not|assign|add|subtract|multiply|divide|exponate|modulate|increment|pre_increment|decrement|pre_decrement|as|has|range|intdivide|intdivided_by|swap|negate|unary_range|to)_\\b",
+      "name": "keyword.spwn"
+    },
+    
     "delimiters": {
       "patterns": [
         {
@@ -377,7 +406,13 @@
                     {
                       "begin": "([a-zA-Z_]\\w*)\\s*(:)(?!:)",
                       "beginCaptures": {
-                        "1": {"name": "entity.name.function.spwn"},
+                        "1": {"patterns": [
+                          {"include": "#op-overloads"},
+                          {
+                            "match": "[a-zA-Z_]\\w*",
+                            "name": "entity.name.function.spwn"
+                          }
+                        ]},
                         "2": {"name": "keyword.operator.spwn"}
                       },
                       "end": ",|(?=\\})",
