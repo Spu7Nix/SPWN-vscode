@@ -34,3 +34,7 @@ Basic language support for the SPWN programming language for Geometry Dash, incl
 - Added support for raw strings
 - Added support for special property names
 - Fixed some bugs
+
+### 0.7.0
+
+- Implemented the spwn file icon
