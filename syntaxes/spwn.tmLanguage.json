@@ -445,7 +445,7 @@
         
         {
           "comment": "Flow control keywords",
-          "match": "\\b(else|for|if|return|error|extract|in|type|import|impl|break|continue|while|as|throw|switch|has|case|sync)\\b",
+          "match": "\\b(else|for|if|return|error|extract|in|type|import|impl|break|continue|while|as|throw|match|in|sync)\\b",
           "name": "keyword.control.spwn"
         }
       ]
